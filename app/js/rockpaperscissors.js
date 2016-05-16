@@ -60,6 +60,20 @@ function getWinner(playerMove,computerMove) {
     // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
     /* YOUR CODE HERE */
+    var playerMove = getPlayerMove();
+    var computerMove = getComputerMove();
+    if (playerMove == "rock" && computerMove == "scissors") {
+    	winner = "player";
+    } else if (playerMove == "paper" && computerMove == "rock") {
+    	winner = "player";
+    } else if (playerMove == "scissors" && computerMove == "paper") {
+    	winner = "player";
+    } else if (playerMove == computerMove) {
+    	winner = "tie";
+    } else {
+    	winner = "computer";
+    }
+
     return winner;
 }
 
@@ -69,5 +83,26 @@ function playToFive() {
     var computerWins = 0;
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
     /* YOUR CODE HERE */
-    return [playerWins, computerWins];
+    while (playerWins < 5 && computerWins < 5) {
+    	getInput();
+    	randomPlay();
+    	/* How do I reference the start of the game? 
+    	Does it start with getInput and randomPlay or does it start with getWinner?
+    	*/
+
+    	if (getWinner("player")) {
+    		playerWins++
+    	} else if (getWinner("computer")) {
+    		computerWins++;
+  		}
+  		/* I thought I read that the return statement will return that value to your function.
+  		In this case, for function getWinner I returned a value for var winner and I want to use that here.
+  		Do I call the output of the function the same way I identify the arguments?
+  		*/
+    	if (playerWins == 5) {
+    	console.log("Player Wins!");
+    	} else if (computerWins == 5) {
+    	console.log("Computer Wins!");
+    
+    console.log("Score is Player " + playerWins + ", computer " + computerWins);
 }
