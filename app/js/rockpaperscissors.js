@@ -4,8 +4,9 @@
 'use strict';
 
 function getInput() {
-    console.log("Please choose either 'rock', 'paper', or 'scissors'.")
-    return prompt();
+    //console.log("Please choose either 'rock', 'paper', or 'scissors'.");
+    //the console.log seemed redundant and played better with the content in prompt
+    return prompt("Please type either 'rock', 'paper', or 'scissors'.");
 }
 function randomPlay() {
     var randomNumber = Math.random();
@@ -43,25 +44,15 @@ function getComputerMove(move) {
     // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
 }
 
-function getWinner(playerMove,computerMove) {
+function getWinner(playerMove, computerMove) {
     var winner;
-    if (playerMove == "rock" && computerMove == "scissors")  {
-      winner = "player";
-    } else if (playerMove == "paper" && computerMove == "rock") {
-      winner = "player";
-    } else if (playerMove == "scissors" && computerMove == "paper") {
-      winner = "player";
-    } else if (playerMove == computerMove) {
-      winner = "tie";
-    } else {
-      winner = "computer"
-    }
     // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
     // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
     /* YOUR CODE HERE */
-    var playerMove = getPlayerMove();
-    var computerMove = getComputerMove();
+    playerMove = getInput();
+    computerMove = randomPlay();
+
     if (playerMove == "rock" && computerMove == "scissors") {
     	winner = "player";
     } else if (playerMove == "paper" && computerMove == "rock") {
@@ -81,28 +72,33 @@ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
+   
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
     /* YOUR CODE HERE */
     while (playerWins < 5 && computerWins < 5) {
-    	getInput();
-    	randomPlay();
+    	var winner = getWinner();
     	/* How do I reference the start of the game? 
-    	Does it start with getInput and randomPlay or does it start with getWinner?
+    	I think it start with getWinner, but I am not sure how to encorporate the validationfrom getPlayerMove and get ComputerMove
     	*/
 
-    	if (getWinner("player")) {
-    		playerWins++
-    	} else if (getWinner("computer")) {
+    	if (winner == "player") {
+    		playerWins++;
+    	} else if (winner == "computer") {
     		computerWins++;
+  		} else if (winner === "") {
+  			return "Loop Error"; // protection from infinate loop
   		}
-  		/* I thought I read that the return statement will return that value to your function.
-  		In this case, for function getWinner I returned a value for var winner and I want to use that here.
-  		Do I call the output of the function the same way I identify the arguments?
-  		*/
-    	if (playerWins == 5) {
-    	console.log("Player Wins!");
-    	} else if (computerWins == 5) {
-    	console.log("Computer Wins!");
+  		console.log("Round goes to " + winner);
+  		console.log("Score is Player: " + playerWins + ", Computer: " + computerWins);
+  	}
+
+    if (playerWins == 5) {
+   		console.log("**** Player Wins! ****");
+   	} else if (computerWins == 5) {
+   		console.log("**** Computer Wins! ****");
+    }
     
-    console.log("Score is Player " + playerWins + ", computer " + computerWins);
+    console.log("Score is Player: " + playerWins + ", Computer: " + computerWins);
 }
+
+playToFive();
