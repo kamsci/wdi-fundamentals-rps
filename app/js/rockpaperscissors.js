@@ -4,8 +4,9 @@
 'use strict';
 
 function getInput() {
-    console.log("Please choose either 'rock', 'paper', or 'scissors'.");
-    return prompt();
+    //console.log("Please choose either 'rock', 'paper', or 'scissors'.");
+    //the console.log seemed redundant and played better with the content in prompt
+    return prompt("Please type either 'rock', 'paper', or 'scissors'.");
 }
 function randomPlay() {
     var randomNumber = Math.random();
@@ -71,11 +72,11 @@ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
-    var winner = getWinner();
+   
     // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
     /* YOUR CODE HERE */
     while (playerWins < 5 && computerWins < 5) {
-    	getWinner();
+    	var winner = getWinner();
     	/* How do I reference the start of the game? 
     	I think it start with getWinner, but I am not sure how to encorporate the validationfrom getPlayerMove and get ComputerMove
     	*/
@@ -84,18 +85,20 @@ function playToFive() {
     		playerWins++;
     	} else if (winner == "computer") {
     		computerWins++;
-  		} else if (winner == "";) {
+  		} else if (winner === "") {
   			return "Loop Error"; // protection from infinate loop
   		}
+  		console.log("Round goes to " + winner);
+  		console.log("Score is Player: " + playerWins + ", Computer: " + computerWins);
   	}
 
     if (playerWins == 5) {
-   		console.log("Player Wins!");
+   		console.log("**** Player Wins! ****");
    	} else if (computerWins == 5) {
-   		console.log("Computer Wins!");
+   		console.log("**** Computer Wins! ****");
     }
     
-    console.log("Score is Player: " + playerWins + ", Cmputer: " + computerWins);
+    console.log("Score is Player: " + playerWins + ", Computer: " + computerWins);
 }
 
 playToFive();
